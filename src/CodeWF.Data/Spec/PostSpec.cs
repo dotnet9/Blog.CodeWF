@@ -28,7 +28,7 @@ public sealed class PostSpec : BaseSpecification<PostEntity>
 
     public PostSpec(string slug, DateTime pubDateUtc) :
         base(p =>
-            p.Slug == slug &&
+            p.Slug.ToLower() == slug.ToLower() &&
             p.PubDateUtc != null
             && p.PubDateUtc.Value.Year == pubDateUtc.Year
             && p.PubDateUtc.Value.Month == pubDateUtc.Month
@@ -46,7 +46,7 @@ public sealed class PostSpec : BaseSpecification<PostEntity>
     }
 
     public PostSpec(DateTime date, string slug)
-        : base(p => p.Slug == slug &&
+        : base(p => p.Slug.ToLower() == slug.ToLower() &&
                     p.IsPublished &&
                     p.PubDateUtc.Value.Date == date &&
                     !p.IsDeleted)
